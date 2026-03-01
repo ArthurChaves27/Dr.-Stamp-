@@ -122,6 +122,8 @@ int main(){
 
 	Texture2D background = LoadTexture("sprite/Sala.png");
 	Texture2D receitaS = LoadTexture("sprite/papelhehe.png");
+	Texture2D buttonS = LoadTexture("sprite/Botao.png");
+	Texture2D carimbadaS = LoadTexture("sprite/Carimbada.png");
 	
 	Vector2 receitaPos = {610, 180};
 	
@@ -140,10 +142,12 @@ int main(){
 	Music music = LoadMusicStream("sprite/musica.mp3");
 	PlayMusicStream(music);
 	music.looping = true;
-	SetMusicVolume(music, 0.2);
+	SetMusicVolume(music, 0.1);
 
 	Sound carimboSound = LoadSound("sprite/Carimbo.wav");
-	Sound clickSound = LoadSound("sprite/Click.wav");	
+	SetSoundVolume(carimboSound, 2.1);
+	Sound clickSound = LoadSound("sprite/Click.wav");
+	SetSoundVolume(clickSound, 0.2);	
 
 	Timer carimbadaTimer = {0};
 	float carimbadaLife = 0.6f;
@@ -199,7 +203,7 @@ int main(){
 			}
 			
 			for(int i = 0; i < diagnostico.sintomasPos.size(); i++){
-				if(CheckCollisionRecs(carimBounds, Rectangle{diagnostico.sintomasPos[i].x, diagnostico.sintomasPos[i].y, diagnostico.sintomasSize.x, diagnostico.sintomasSize.y})){	
+				if(CheckCollisionRecs(carimBounds, Rectangle{diagnostico.sintomasPos[i].x, diagnostico.sintomasPos[i].y, diagnostico.sintomasSize.x, diagnostico.sintomasSize.y}) && TimerDone(&carimbadaTimer)){	
 				
 					sintomaSel = i;
 			
@@ -216,7 +220,7 @@ int main(){
 
 			if(receita){
 
-				if(CheckCollisionRecs(carimBounds, diagnostico.aprove)){
+				if(CheckCollisionRecs(carimBounds, diagnostico.aprove) && TimerDone(&carimbadaTimer)){
 
 					transition = true;
 					falando = false;
@@ -235,7 +239,7 @@ int main(){
 
 				}
 
-				if(CheckCollisionRecs(carimBounds, transButton)){
+				if(CheckCollisionRecs(carimBounds, transButton) && TimerDone(&carimbadaTimer)){
 
 					pacAtual++;
 					pac++;
@@ -280,7 +284,7 @@ int main(){
 			falando = false;
 			receita = false;
 			//getCarimbo = false;
-			if(CheckCollisionRecs(carimBounds, endButton)){
+			if(CheckCollisionRecs(carimBounds, endButton) && TimerDone(&carimbadaTimer)){
 
 				CloseWindow();
 
@@ -288,7 +292,7 @@ int main(){
 
 		}
 
-		if(animCounter >= 0.5 && !TimerDone(&carimbadaTimer)){
+		if(animCounter >= 0.5 && TimerDone(&carimbadaTimer)){
 
 				animCounter = 0;
 				animFrame++;	
@@ -309,7 +313,7 @@ int main(){
 
 		if(menu){
 
-			DrawText("Dia de Doutor", 640 - MeasureText("Dia de Doutor", 50)/2, 200, 50, BLACK);
+			DrawText("Dr.\nStamp", 20, 200, 80, BLACK);
 			DrawText("Pressione enter para começar", 640 - MeasureText("Pressione enter para começar", 20)/2, 700, 20, BLACK);
 
 		}
@@ -356,7 +360,8 @@ int main(){
 				DrawText(diagnostico.sintomasText3[i], diagnostico.sintomasPos[i].x, diagnostico.sintomasPos[i].y - 60, 17, BLACK);
 
 			} 
-			DrawRectangleV(diagnostico.sintomasPos[i], diagnostico.sintomasSize, sintomaCor);
+			DrawTextureV(buttonS, diagnostico.sintomasPos[i], sintomaCor);
+			//DrawRectangleV(diagnostico.sintomasPos[i], diagnostico.sintomasSize, sintomaCor);	
 
 			
 		
@@ -415,7 +420,8 @@ int main(){
 			
 			DrawRectangle(630 - MeasureText("Parabéns, você conseguiu diagnosticar todos os pacientes!", 40)/2, 290, MeasureText("Parabéns, você conseguiu diagnosticar todos os pacientes!", 40) + 20, 60, BLACK);
 			DrawText("Parabéns, você conseguiu diagnosticar todos os pacientes!", 640 - MeasureText("Parabéns, você conseguiu diagnosticar todos os pacientes!", 40)/2, 300, 40, WHITE);
-			button(595, 380, BLACK);
+			DrawTextureV(buttonS, (Vector2){595, 380}, BLACK);
+			//button(595, 380, BLACK);
 
 		}
 
@@ -423,7 +429,8 @@ int main(){
 			
 			DrawRectangle(630 - MeasureText("Parabéns, você conseguiu diagnosticar seu paciente!", 40)/2, 290, MeasureText("Parabéns, você conseguiu diagnosticar seu paciente!", 40) + 20, 60, BLACK);
 			DrawText("Parabéns, você conseguiu diagnosticar seu paciente!", 640 - MeasureText("Parabéns, você conseguiu diagnosticar seu paciente!", 40)/2, 300, 40, WHITE);
-			button(595, 380, BLACK);
+			DrawTextureV(buttonS, (Vector2){595, 380}, BLACK);
+			//button(595, 380, BLACK);
 
 		}
 
@@ -433,7 +440,8 @@ int main(){
 			
 			if(!TimerDone(&carimbadaTimer)){	
 
-				DrawRectangleV(carimPos, carimSize, GREEN);	
+				//DrawRectangleV(carimPos, carimSize, GREEN);	
+				DrawTextureV(carimbadaS, carimPos, BLACK);
 	
 			}
 

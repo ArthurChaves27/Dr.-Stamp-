@@ -1,7 +1,16 @@
 # Dr.-Stamp-
-A simple game made for a GameJAM called FelpoJAM.
+Vire um médico por um dia e carimbe receitas aos seus pacientes!
 
-Made with raylib.
+Feito para a FelpoJAM
+Feito com raylib.
 
-To compile use the g++ compiler.
+#CONTROLES
+
+- P pause
+- F Tela cheia
+- enter para começar
+- Com o mouse segure o botão esquerdo para pegar o carimbo e use
+- C Carimbar
+
+
 

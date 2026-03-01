@@ -309,7 +309,7 @@ int main(){
 
 		BeginDrawing();
 		DrawTexture(background, 0, 0, WHITE);	
-		DrawFPS(10, 10);
+		//DrawFPS(10, 10);
 
 		if(menu){
 
@@ -448,8 +448,9 @@ int main(){
 			//DrawRectangleRec(carimboBounds, BLUE);
 			//DrawRectangleV(carimbo.Pos, carimbo.Size, BLACK);
 			DrawTextureRec(carimbo.carimboSprite, carimbo.carimboAnim, carimbo.Pos, WHITE);
-			DrawText("C para CARIMBAR", 640 - MeasureText("C para CARIMBAR", 20)/2, 660, 20, WHITE);
-			
+			DrawText("C para CARIMBAR", 20 /* - MeasureText("C para CARIMBAR", 20)/2*/, 30, 20, BLACK);
+			DrawText("Carimbe o sintoma correto de acordo com as falas do personagem", 640 - MeasureText("Carimbe o sintoma correto de acordo com as falas do personagem", 20)/2, 660, 20, WHITE);
+
 		}
 	
 

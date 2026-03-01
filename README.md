@@ -4,7 +4,7 @@ Vire um médico por um dia e carimbe receitas aos seus pacientes!
 Feito para a FelpoJAM
 Feito com raylib.
 
-#CONTROLES
+# CONTROLES
 
 - P pause
 - F Tela cheia
